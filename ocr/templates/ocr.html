@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>OCR TAMIL</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  </head>
+  <body>
+    <div class="container">
+      <div class="nav">
+        <a href="/dashboard">Dashboard</a>
+        <a href="/logout">Logout</a>
+      </div>
+      <h2>OCR TAMIL</h2>
+      <form method="POST" enctype="multipart/form-data">
+        <label for="image">Upload Image:</label>
+        <input type="file" id="image" name="image" accept="image/*" required>
+        
+        <label for="mode">Mode:</label>
+        <select id="mode" name="mode" required>
+          <option value="recognize" {% if mode == 'recognize' %}selected{% endif %}>Recognize Only</option>
+          <option value="detect" {% if mode == 'detect' %}selected{% endif %}>Detect + Recognize</option>
+        </select>
+        
+        <button type="submit">Extract Text</button>
+      </form>
+      {% if result %}
+      <label for="extracted_text">Extracted Text:</label>
+      <textarea id="extracted_text" readonly>{{ result }}</textarea>
+      {% endif %}
+      <div class="footer">© OCR Tamil Application</div>
+    </div>
+  </body>
+</html>

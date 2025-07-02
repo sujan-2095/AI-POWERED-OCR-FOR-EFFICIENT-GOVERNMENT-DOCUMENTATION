@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Dashboard - OCR Tamil</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  </head>
+  <body>
+    <div class="container">
+      <div class="nav">
+        <a href="/ocr">Upload New Image</a>
+        <a href="/logout">Logout</a>
+      </div>
+      <h2>Welcome, {{ username }}</h2>
+      <p>Below are your past OCR extractions:</p>
+      <ul>
+        {% for record in records %}
+        <li>
+          <strong>{{ record.timestamp }}</strong><br>
+          <em>{{ record.filename }}</em><br>
+          <pre style="white-space: pre-wrap;">{{ record.text }}</pre>
+        </li>
+        {% else %}
+        <p>No past OCR results found.</p>
+        {% endfor %}
+      </ul>
+    </div>
+  </body>
+</html>
